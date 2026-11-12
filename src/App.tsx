@@ -485,7 +485,13 @@ export default function App() {
                 ＋ 添加和弦
               </button>
             </div>
-            <div className="pages">
+            <div
+              className={
+                sheet.slots.some((s) => s.notes.length > 12)
+                  ? "pages dense-print"
+                  : "pages"
+              }
+            >
               {Array.from(
                 { length: Math.ceil(sheet.slots.length / 4) },
                 (_, page) => (

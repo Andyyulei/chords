@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "id": "a029d8d9-eaec-4d5c-95bc-9fe4947c3cd6",
+  "title": "ii–V–I · 留白练习",
+  "key": 0,
+  "slots": [
+    {
+      "id": "41bcc8d7-5bea-4d4b-a800-1b218f1855c0",
+      "chord": {
+        "degree": 2,
+        "quality": "m7",
+        "accidental": 0
+      },
+      "frets": [
+        -1,
+        5,
+        -1,
+        5,
+        6,
+        -1
+      ],
+      "notes": [
+        {
+          "midi": 50,
+          "hand": "left"
+        },
+        {
+          "midi": 53,
+          "hand": "right"
+        },
+        {
+          "midi": 57,
+          "hand": "right"
+        },
+        {
+          "midi": 60,
+          "hand": "right"
+        }
+      ],
+      "guitarBase": [
+        -1,
+        5,
+        7,
+        5,
+        6,
+        5
+      ],
+      "pianoBase": [
+        {
+          "midi": 50,
+          "hand": "left"
+        },
+        {
+          "midi": 53,
+          "hand": "right"
+        },
+        {
+          "midi": 57,
+          "hand": "right"
+        },
+        {
+          "midi": 60,
+          "hand": "right"
+        }
+      ],
+      "guitarEdited": true,
+      "pianoEdited": false
+    },
+    {
+      "id": "77cf5aff-472e-4223-ae3e-eda5c454f613",
+      "chord": {
+        "degree": 5,
+        "quality": "7",
+        "accidental": 0
+      },
+      "frets": [
+        3,
+        2,
+        3,
+        4,
+        3,
+        3
+      ],
+      "notes": [
+        {
+          "midi": 55,
+          "hand": "left"
+        },
+        {
+          "midi": 59,
+          "hand": "right"
+        },
+        {
+          "midi": 62,
+          "hand": "right"
+        },
+        {
+          "midi": 65,
+          "hand": "right"
+        }
+      ],
+      "guitarBase": [
+        3,
+        2,
+        3,
+        4,
+        3,
+        3
+      ],
+      "pianoBase": [
+        {
+          "midi": 55,
+          "hand": "left"
+        },
+        {
+          "midi": 59,
+          "hand": "right"
+        },
+        {
+          "midi": 62,
+          "hand": "right"
+        },
+        {
+          "midi": 65,
+          "hand": "right"
+        }
+      ],
+      "guitarEdited": false,
+      "pianoEdited": false
+    },
+    {
+      "id": "9b337f47-6724-462f-8452-75565bf626c0",
+      "chord": {
+        "degree": 1,
+        "quality": "maj7",
+        "accidental": 0
+      },
+      "frets": [
+        3,
+        2,
+        2,
+        4,
+        1,
+        3
+      ],
+      "notes": [
+        {
+          "midi": 48,
+          "hand": "left"
+        },
+        {
+          "midi": 52,
+          "hand": "right"
+        },
+        {
+          "midi": 59,
+          "hand": "right"
+        }
+      ],
+      "guitarBase": [
+        3,
+        2,
+        2,
+        4,
+        1,
+        3
+      ],
+      "pianoBase": [
+        {
+          "midi": 48,
+          "hand": "left"
+        },
+        {
+          "midi": 52,
+          "hand": "right"
+        },
+        {
+          "midi": 55,
+          "hand": "right"
+        },
+        {
+          "midi": 59,
+          "hand": "right"
+        }
+      ],
+      "guitarEdited": false,
+      "pianoEdited": true
+    },
+    {
+      "id": "ba94e32d-eb04-495f-a7e6-caefa3ea0411",
+      "chord": {
+        "degree": 6,
+        "quality": "m7",
+        "accidental": 0
+      },
+      "frets": [
+        3,
+        3,
+        2,
+        2,
+        1,
+        3
+      ],
+      "notes": [
+        {
+          "midi": 57,
+          "hand": "left"
+        },
+        {
+          "midi": 60,
+          "hand": "right"
+        },
+        {
+          "midi": 64,
+          "hand": "right"
+        },
+        {
+          "midi": 67,
+          "hand": "right"
+        }
+      ],
+      "guitarBase": [
+        3,
+        3,
+        2,
+        2,
+        1,
+        3
+      ],
+      "pianoBase": [
+        {
+          "midi": 57,
+          "hand": "left"
+        },
+        {
+          "midi": 60,
+          "hand": "right"
+        },
+        {
+          "midi": 64,
+          "hand": "right"
+        },
+        {
+          "midi": 67,
+          "hand": "right"
+        }
+      ],
+      "guitarEdited": false,
+      "pianoEdited": false
+    }
+  ],
+  "display": {
+    "labels": "both",
+    "instruments": "both"
+  },
+  "createdAt": "2026-11-12T16:56:57.754Z",
+  "updatedAt": "2026-11-12T16:56:57.754Z"
+}

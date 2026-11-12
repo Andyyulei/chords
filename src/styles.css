@@ -893,3 +893,31 @@ footer {
     min-height: 48mm;
   }
 }
+
+@media print {
+  .dense-print .chord-grid {
+    display: block !important;
+    break-after: auto;
+  }
+  .dense-print .chord-card {
+    display: block;
+    break-after: page;
+    break-inside: avoid;
+    margin-bottom: 0;
+  }
+  .dense-print .chord-card:last-child {
+    break-after: page;
+  }
+  .dense-print .instrument {
+    padding: 2mm 4mm;
+  }
+  .dense-print .piano {
+    min-height: 0;
+  }
+  .dense-print .print-piano svg {
+    max-width: 48mm;
+  }
+  .dense-print .string-labels {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}

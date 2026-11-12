@@ -55,7 +55,7 @@ describe("music model", () => {
     for (let r = 0; r < 12; r++)
       for (const q of Object.keys(formulas) as (keyof typeof formulas)[]) {
         const g = guitarCandidates(r, q);
-        expect(g.length).toBeGreaterThanOrEqual(2);
+        expect(g.length).toBeGreaterThanOrEqual(3);
         expect(new Set(g.map((f) => f.join())).size).toBe(g.length);
         for (const f of g) {
           expect(f).toHaveLength(6);
