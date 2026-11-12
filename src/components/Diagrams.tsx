@@ -230,11 +230,58 @@ export function Piano({
 }) {
   const [hand, setHand] = useState<"left" | "right">("right");
   const keyboardRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
+  const [scrollState, setScrollState] = useState({ left: false, right: false });
+  const selectedSignature = slot.notes
+    .map((n) => n.midi)
+    .sort((a, b) => a - b)
+    .join();
+  function updateScrollState() {
     const el = keyboardRef.current;
-    const first = el?.querySelector(".selected") as HTMLElement | null;
-    if (el && first) el.scrollLeft = Math.max(0, first.offsetLeft - 50);
-  }, [slot.id, JSON.stringify(slot.pianoBase)]);
+    if (!el) return;
+    const next = {
+      left: el.scrollLeft > 1,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
+    };
+    setScrollState((previous) =>
+      previous.left === next.left && previous.right === next.right
+        ? previous
+        : next,
+    );
+  }
+  function focusNotes() {
+    const el = keyboardRef.current;
+    if (!el) return;
+    const selected = [...el.querySelectorAll<HTMLElement>(".selected")];
+    if (selected.length) {
+      const start = Math.min(...selected.map((key) => key.offsetLeft));
+      const end = Math.max(
+        ...selected.map((key) => key.offsetLeft + key.offsetWidth),
+      );
+      el.scrollLeft = Math.max(0, (start + end - el.clientWidth) / 2);
+    }
+    updateScrollState();
+  }
+  function browse(direction: number) {
+    const el = keyboardRef.current;
+    if (el)
+      el.scrollBy({
+        left: direction * el.clientWidth * 0.7,
+        behavior: "smooth",
+      });
+  }
+  useEffect(() => {
+    focusNotes();
+    const observer = new ResizeObserver(() => focusNotes());
+    const el = keyboardRef.current;
+    if (el) observer.observe(el);
+    return () => observer.disconnect();
+  }, [
+    slot.id,
+    JSON.stringify(slot.pianoBase),
+    sheet.key,
+    editing,
+    editing ? "" : selectedSignature,
+  ]);
   const toggle = (midi: number) => {
     const existing = slot.notes.find((n) => n.midi === midi);
     onChange(
@@ -263,7 +310,23 @@ export function Piano({
           <small>另一只手已选的音可直接转移</small>
         </div>
       )}
-      <div className="keyboard-scroll screen-only" ref={keyboardRef}>
+      <div
+        className="keyboard-scroll screen-only"
+        ref={keyboardRef}
+        role="region"
+        aria-label="可左右滚动的钢琴键盘"
+        tabIndex={0}
+        onScroll={updateScrollState}
+        onKeyDown={(event) => {
+          if (
+            event.target === event.currentTarget &&
+            ["ArrowLeft", "ArrowRight"].includes(event.key)
+          ) {
+            event.preventDefault();
+            browse(event.key === "ArrowLeft" ? -1 : 1);
+          }
+        }}
+      >
         <div className="keyboard">
           {Array.from({ length: 49 }, (_, i) => {
             const m = 36 + i,
@@ -277,6 +340,7 @@ export function Piano({
                 aria-label={`琴键 ${t.full}`}
                 aria-pressed={!!selected}
                 onClick={() => toggle(m)}
+                data-midi={m}
                 className={`key ${black ? "black" : "white"} ${selected ? "selected " + selected.hand : ""}`}
               >
                 <span>
@@ -289,6 +353,32 @@ export function Piano({
           })}
         </div>
       </div>
+      <div className="keyboard-navigation screen-only">
+        <button
+          aria-label="向左浏览琴键"
+          disabled={!scrollState.left}
+          onClick={() => browse(-1)}
+        >
+          ← 向左
+        </button>
+        <button
+          className="focus-notes"
+          onClick={focusNotes}
+          disabled={!slot.notes.length}
+        >
+          定位当前选音
+        </button>
+        <button
+          aria-label="向右浏览琴键"
+          disabled={!scrollState.right}
+          onClick={() => browse(1)}
+        >
+          向右 →
+        </button>
+      </div>
+      <p className="keyboard-hint screen-only">
+        C2–C6 · 可左右滑动，也可聚焦键盘后按 ← →
+      </p>
       <div className="print-piano">
         <PrintPiano sheet={sheet} slot={slot} />
       </div>

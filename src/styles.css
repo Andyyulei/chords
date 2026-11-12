@@ -199,7 +199,11 @@ h1 {
   flex-wrap: wrap;
 }
 .settings {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(110px, 0.8fr) minmax(0, 2.5fr) repeat(
+      2,
+      minmax(120px, 1fr)
+    );
   gap: 18px;
   margin-top: 24px;
 }
@@ -209,7 +213,7 @@ h1 {
   gap: 8px;
   font-size: 11px;
   color: #7b8a7e;
-  min-width: 120px;
+  min-width: 0;
 }
 .settings select {
   color: #344b3c;
@@ -312,7 +316,11 @@ h1 {
   margin: 4px 0 15px;
 }
 .spec-controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(48px, 0.7fr) minmax(54px, 0.85fr) minmax(
+      0,
+      1.65fr
+    );
   gap: 5px;
 }
 .spec-controls select {
@@ -353,14 +361,15 @@ h1 {
   background: #edf3eb;
 }
 .candidate {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 5px;
   margin-top: 12px;
 }
 .candidate select {
   width: 100%;
   min-width: 0;
-  font-size: 10px;
+  font-size: 11px;
   padding: 5px;
   flex: 1;
   min-height: 30px;
@@ -371,6 +380,7 @@ h1 {
   min-height: 30px;
 }
 .guitar-wrap {
+  width: 100%;
   max-width: 280px;
   margin: 12px auto 0;
 }
@@ -625,7 +635,7 @@ footer {
 .print-heading {
   display: none;
 }
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .chord-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -634,7 +644,7 @@ footer {
     display: none;
   }
   .settings {
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .title-row {
     align-items: start;
@@ -642,7 +652,7 @@ footer {
   }
   .settings label {
     flex: 1;
-    min-width: 150px;
+    min-width: 0;
   }
   .utility {
     flex-wrap: wrap;
@@ -699,7 +709,7 @@ footer {
     gap: 10px;
   }
   .settings label {
-    min-width: 125px;
+    min-width: 0;
   }
   .utility > div {
     flex-wrap: wrap;
@@ -880,6 +890,7 @@ footer {
 
 .chord-card {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
 }
 .keyboard-scroll {
@@ -887,6 +898,7 @@ footer {
 }
 @media print {
   .chord-card {
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
   }
   .piano {
@@ -919,5 +931,80 @@ footer {
   }
   .dense-print .string-labels {
     grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Grid children must shrink to the card, never to the keyboard's intrinsic width. */
+.chord-card > *,
+.instrument > *,
+.card-heading,
+.settings > *,
+.title-row > * {
+  min-width: 0;
+}
+.settings select,
+.spec-controls select {
+  width: 100%;
+  max-width: 100%;
+}
+.instrument-title {
+  gap: 8px;
+}
+.instrument-title button,
+.candidate button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.details,
+.string-labels,
+.theory {
+  overflow-wrap: anywhere;
+}
+.keyboard-scroll {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #8fa899 #edf2e9;
+  border-radius: 4px;
+}
+.keyboard {
+  min-width: 100%;
+  justify-content: center;
+}
+.keyboard-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: 8px;
+}
+.keyboard-navigation button {
+  font-size: 10px;
+  padding: 5px 8px;
+  min-height: 32px;
+}
+.keyboard-navigation .focus-notes {
+  margin-inline: auto;
+}
+.keyboard-hint {
+  font-size: 10px;
+  color: #718475;
+  margin: 8px 0 0;
+}
+.keyboard-scroll:focus-visible {
+  outline: 3px solid #d2a54b;
+  outline-offset: 2px;
+}
+@media (max-width: 600px) {
+  .keyboard-navigation button {
+    min-height: 44px;
+  }
+  .settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media print {
+  .guitar-wrap {
+    width: 100%;
   }
 }

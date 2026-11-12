@@ -487,7 +487,13 @@ export default function App() {
             </div>
             <div
               className={
-                sheet.slots.some((s) => s.notes.length > 12)
+                sheet.display.instruments !== "guitar" &&
+                sheet.slots.some(
+                  (s) =>
+                    s.notes.length > 12 ||
+                    new Set(s.notes.map((n) => Math.floor(n.midi / 12))).size >
+                      2,
+                )
                   ? "pages dense-print"
                   : "pages"
               }
